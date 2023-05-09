@@ -25,6 +25,8 @@ public class J12891 {
     int SUBSTR_LENGTH = Integer.parseInt(st.nextToken());
     //DNA 문자열
     char[] DNA_ARR = bufferedReader.readLine().toCharArray();
+    //결과 값
+    int result = 0;
 
     st = new StringTokenizer(bufferedReader.readLine());
     for (int i = 0; i < minArr.length; i++) {
@@ -37,9 +39,23 @@ public class J12891 {
     for (int i = 0; i < SUBSTR_LENGTH; i++) {
       Add(DNA_ARR[i]);
     }
+    if (checkPWOption == 4) result++;
+    //이제 슬라이드를 한칸씩 이동하면서 조사
+    for (int k = SUBSTR_LENGTH; k < LENGTH; k++) {
+      //이동 전 이전 시작부분
+      int prior = k - SUBSTR_LENGTH;
+      //이동하면서 새롭게 추가된 부분
+      int newpart = k;
+      Add(DNA_ARR[newpart]);
+      Remove(DNA_ARR[prior]);
+      if (checkPWOption == 4) result++;
+    }
+
+    System.out.println(result);
+    bufferedReader.close();
   }
 
-  //현재 슬라이딩
+  //현재 슬라이딩에 대해 값을 더할 부분
   private static void Add(char c) {
     switch (c) {
       case 'A':
@@ -57,6 +73,29 @@ public class J12891 {
       case 'T':
         nowArr[3]++;
         if (minArr[3] == nowArr[3]) checkPWOption++;
+        break;
+    }
+  }
+
+  //옮기면서 이전부분을 삭제
+  private static void Remove(char c) {
+    switch (c) {
+      case 'A':
+        //이전 슬라이드가 조건에 딱 맞았다면 지금 문자를 빼면서 그 조건에 안맞게 되기 때문에
+        if (minArr[0] == nowArr[0]) checkPWOption--;
+        nowArr[0]--;
+        break;
+      case 'C':
+        if (minArr[1] == nowArr[1]) checkPWOption--;
+        nowArr[1]--;
+        break;
+      case 'G':
+        if (minArr[2] == nowArr[2]) checkPWOption--;
+        nowArr[2]--;
+        break;
+      case 'T':
+        if (minArr[3] == nowArr[3]) checkPWOption--;
+        nowArr[3]--;
         break;
     }
   }
