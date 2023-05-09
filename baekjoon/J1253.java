@@ -4,7 +4,7 @@ import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.StringTokenizer;
 
-public class J1253Re {
+public class J1253 {
 
   public static void main(String[] args)
     throws NumberFormatException, IOException {
@@ -35,18 +35,80 @@ public class J1253Re {
 
       while (start < end) {
         long sum = arr[start] + arr[end];
+
+        System.out.println(
+          String.format(
+            "시작(key:%d) s=%d e=%d arr[s]=%d arr[e]=%d sum=%d",
+            key,
+            start,
+            end,
+            arr[start],
+            arr[end],
+            sum
+          )
+        );
         //먼저 맞는 값이 나타난다해도 서로다른 두 숫자가 자기자신이 아니여야한다,
         if (sum == key) {
           if (index != start && index != end) {
+            System.out.println(
+              String.format(
+                "좋은 수(key:%d) s=%d e=%d arr[s]=%d arr[e]=%d sum=%d",
+                key,
+                start,
+                end,
+                arr[start],
+                arr[end],
+                sum
+              )
+            );
             answer++;
             break;
             //아래 두 경우는 둘 중하나가 확인할 숫자 본인이고 나머지가 0인 경우이다.
             //이때는 자기 자신이면 안되기 때문에 본인을 이동시켜서 다시 좋은 수를 찾도록 한다.
-          } else if (index == start) start++; else if (index == end) end--;
+          } else if (index == start) {
+            System.out.println(
+              String.format(
+                "시작이 본인(key:%d) s=%d e=%d arr[s]=%d arr[e]=%d sum=%d",
+                key,
+                start,
+                end,
+                arr[start],
+                arr[end],
+                sum
+              )
+            );
+
+            start++;
+          } else if (index == end) {
+            System.out.println(
+              String.format(
+                "끝이 본인(key:%d) s=%d e=%d arr[s]=%d arr[e]=%d sum=%d",
+                key,
+                start,
+                end,
+                arr[start],
+                arr[end],
+                sum
+              )
+            );
+
+            end--;
+          }
           //합이 작으면 커야하기 때문에 시작을 더 큰 숫자로 이동한다,
         } else if (sum < key) start++;
         //합이 더 크다면 줄여야하기때문에 끝을 더 작은 숫자로 이동한다.
         else end--;
+        System.out.println(
+          String.format(
+            "끝(key:%d) s=%d e=%d arr[s]=%d arr[e]=%d sum=%d",
+            key,
+            start,
+            end,
+            arr[start],
+            arr[end],
+            sum
+          )
+        );
       }
     }
   }
