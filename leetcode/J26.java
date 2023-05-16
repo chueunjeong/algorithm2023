@@ -10,7 +10,7 @@ public class J26 {
     int[] arr1 = { 1, 1, 2 };
     int[] arr2 = { 0, 0, 1, 1, 1, 2, 2, 3, 3, 4 };
     int[] arr3 = { 1 };
-    System.out.println(removeDuplicates(arr3));
+    System.out.println(removeDuplicates(arr2));
   }
 
   public static int removeDuplicates(int[] nums) {
@@ -21,16 +21,18 @@ public class J26 {
     List<Integer> list = new ArrayList<Integer>();
 
     //nums를 순회하면서 유니크하면 list에 저장하고 아니면 continue
+    int i = 0;
     for (int num : numsCopy) {
       if (!list.contains(num)) {
         list.add(num);
+        nums[i++] = num;
       } else continue;
     }
 
     //저장한 list를 nums에 차곡차곡 넣어주기
-    for (int i = 0; i < list.size(); i++) {
-      nums[i] = list.get(i);
-    }
+    // for (int i = 0; i < list.size(); i++) {
+    //   nums[i] = list.get(i);
+    // }
 
     //다 넣었는데도 나머지 공간이 남았으면 101 넣어주기
     if (nums.length - list.size() > 0) {
