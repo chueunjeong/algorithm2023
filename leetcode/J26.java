@@ -29,11 +29,6 @@ public class J26 {
       } else continue;
     }
 
-    //저장한 list를 nums에 차곡차곡 넣어주기
-    // for (int i = 0; i < list.size(); i++) {
-    //   nums[i] = list.get(i);
-    // }
-
     //다 넣었는데도 나머지 공간이 남았으면 101 넣어주기
     if (nums.length - list.size() > 0) {
       Arrays.fill(nums, list.size(), nums.length, 101);
