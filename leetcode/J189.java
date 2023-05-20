@@ -17,18 +17,5 @@ public class J189 {
     for (int i = 0; i < numsCopy.length; i++) {
       nums[(i + k) % nums.length] = numsCopy[i];
     }
-
-    System.out.println(Arrays.toString(nums));
-  }
-
-  public class Node {
-
-    int index;
-    int num;
-
-    public Node(int index, int num) {
-      this.index = index;
-      this.num = num;
-    }
   }
 }
